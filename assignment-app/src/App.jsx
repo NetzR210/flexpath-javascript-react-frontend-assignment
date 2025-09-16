@@ -1,14 +1,20 @@
-import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import SearchPage from './pages/SearchPage';
+import Navbar from './components/Navbar';
+import SearchProvider from './context/SearchProvider'; // ✅ updated import
 
 function App() {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        {/* <p> tag is a placeholder, You'll need to change the tag/component type later*/}
-        <p className="navbar-brand ms-4 nav-link">User Behavior Data</p>
-      </nav>
-      <hr />
-    </div>
+    <BrowserRouter>
+      <SearchProvider> {/* wraps the app to provide context */}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+      </SearchProvider>
+    </BrowserRouter>
   );
 }
 
