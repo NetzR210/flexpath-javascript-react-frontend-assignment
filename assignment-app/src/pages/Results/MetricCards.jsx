@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-
+// Utility functions
 const getAverage = (arr, key) => {
   const values = arr.map(item => Number(item[key])).filter(n => !isNaN(n));
   if (!values.length) return '0.00';
@@ -17,6 +16,13 @@ const getMedian = (arr, key) => {
   return median.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
+/**
+ * @param {Object} props
+ * @param {string} props.title - Metric title
+ * @param {string} props.average - Average value as formatted string
+ * @param {string} props.median - Median value as formatted string
+ * @param {string} props.unit - Unit of measurement
+ */
 const MetricCard = ({ title, average, median, unit }) => (
   <div className="card text-center w-100 h-100">
     <div className="card-body d-flex flex-column justify-content-center">
@@ -27,13 +33,10 @@ const MetricCard = ({ title, average, median, unit }) => (
   </div>
 );
 
-MetricCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  average: PropTypes.string.isRequired,
-  median: PropTypes.string.isRequired,
-  unit: PropTypes.string.isRequired
-};
-
+/**
+ * @param {Object} props
+ * @param {Array<Object>} props.results - Array of data objects to calculate metrics from
+ */
 const MetricCards = ({ results }) => {
   const metrics = [
     { key: 'app_usage_time', label: 'App Usage Time (min/day)', unit: 'Minutes' },
@@ -56,10 +59,6 @@ const MetricCards = ({ results }) => {
       ))}
     </div>
   );
-};
-
-MetricCards.propTypes = {
-  results: PropTypes.array.isRequired
 };
 
 export default MetricCards;
